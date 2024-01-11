@@ -1,5 +1,9 @@
 'use strict';
 
+const list = document.querySelector ('.js-list');
+
+
+
 const tasks = [
     { name: 'Recoger setas en el campo', completed: true },
     { name: 'Comprar pilas', completed: true },
@@ -10,4 +14,4 @@ const tasks = [
     },
   ];
 
-  ul.innerHTML(`<li><input type="checkbox" id="input" name="input" class="task-input js-text-task-filter"><label for="input">'Recoger setas en el campo'</label></li>`);
+  list.innerHTML = `<li><input type="checkbox" id="input" name="input" class="task-input js-text-task-filter"><label for="input">'Recoger setas en el campo'</label></li>)`
