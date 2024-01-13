@@ -39,6 +39,7 @@ const tasks = [
    
 */
   
+//NO ENTIENDO PARA QUE QUEREMOS EL TASK ID. PORQUE SALE IGUAL PINTADO 
 
  function renderList () {
   for (const task of tasks){
