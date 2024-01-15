@@ -46,18 +46,18 @@ const tasks = [
   
   if(task.completed) {
     list.innerHTML += 
-    `<li class='tachado js-li' name='${task.id}'><input 
+    `<li class='tachado js-li' name='${task.id}'>${task.name}<input 
     type="checkbox" 
     id="${task.id}" 
     name="input" 
-    class="task-input js-text-task-filter" checked> ${task.name}</li>
+    class="task-input js-text-task-filter" checked> </li>
     `
   } else { 
-    list.innerHTML +=  `<li class='js-li' name='${task.id}'><input 
+    list.innerHTML +=  `<li class='js-li' name='${task.id}'>${task.name}<input 
   type="checkbox" 
   id="${task.id}" 
   name="input" 
-  class="task-input js-text-task-filter" > ${task.name}</li>
+  class="task-input js-text-task-filter" > </li>
   `
   }
 }
@@ -77,13 +77,43 @@ const li = document.querySelectorAll ('.js-li'); //li es un array
 
 
   renderList();
+ 
+  //2 FILTRAR TAREAS
 
+const btnFilter = document.querySelector('.js-btn-filter');
+const textTaskFilter = document.querySelector('.js-text-task-filter');
+const filteredTask = [];
 
+function handleFilter (event) {
+  event.preventDefault();
+  
+  /*list.innerHTML += `<li> ${textTaskFilter.value}</li>`;*/
+  
+  console.log(textTaskFilter.value);
 
+  for (const task of tasks) {
+    const inputFill = textTaskFilter.value
+    if (task.name.includes(inputFill)) {
+      filteredTask.push (task);
+      list.innerHTML += `<li> ${filteredTask.name} </li>`;
+    
+      
+      console.log (filteredTask);
 
+  } 
+}
 
+};
 
+btnFilter.addEventListener('click', handleFilter);
 
+/* 
+      
+
+      if (task.name.includes(inputFill)) {
+        filteredTask.push (task);
+        list.innerHTML += renderList(task);
+*/
 /*
   console.log(list.innerHTML);
   console.log(tasks[0].name);
