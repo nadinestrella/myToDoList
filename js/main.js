@@ -18,18 +18,11 @@ let tasks = [];
 fetch(SERVER_URL)
   .then((response) => response.json())
   .then((todo) => {
-    renderTasks(todo.results);
+    tasks = todo.results; //llenar con lo q viene de la api
+    renderTasks(tasks);
     console.log(todo);
     console.log(todo.results);
   });
-
-function handleCheck(event) {
-  const id = event.target.id;
-  console.log(id);
-  tasks[id].completed = !tasks[id].completed;
-  console.log(tasks);
-  renderTasks(tasks);
-}
 
 const listenCheck = () => {
   const allCheckbox = document.querySelectorAll('.js-check');
@@ -48,18 +41,30 @@ const renderTasks = (tasks) => {
     if (tasks[index].completed) {
       //tasks[index].completed === true
       list.innerHTML += `<li class= "tachado"> 
-    <input type="checkbox" class= "js-check" id="${index}" checked>
+    <input type="checkbox" class= "js-check" id="${tasks[index].id}" checked>
     ${tasks[index].name}
   </li>`;
     } else {
       list.innerHTML += `<li> 
-    <input type="checkbox" class= "js-check" id="${index}">
+    <input type="checkbox" class= "js-check" id="${tasks[index].id}"> 
     ${tasks[index].name}
   </li>`;
     }
   }
   listenCheck();
+  // importante que el id coincida con el id de la api task[index].id
 };
+
+function handleCheck(event) {
+  const idTask = parseInt(event.target.id); //esto cambia a numero
+  console.log(idTask);
+  console.log(tasks);
+  const indexTask = tasks.findIndex((task) => task.id === idTask);
+  console.log(indexTask);
+  tasks[indexTask].completed = !tasks[indexTask].completed; //si el id esta clickado la tacha y si no lo contario
+
+  renderTasks(tasks);
+}
 
 renderTasks(tasks);
 
