@@ -1,127 +1,74 @@
-'use strict';
+"use strict";
 
-const list = document.querySelector ('.js-list');
+const list = document.querySelector(".js-list");
+const btnFilter = document.querySelector(".js-btn-filter");
+const textTaskFilter = document.querySelector(".js-text-task-filter");
+const GITHUB_USER = "nadinestrella";
+const SERVER_URL = `https://dev.adalab.es/api/todo/`;
 
-const tasks = [
-    { name: 'Recoger setas en el campo', completed: true, id:0 },
-    { name: 'Comprar pilas', completed: true, id:1 },
-    { name: 'Poner una lavadora de blancos', completed: true, id:2 },
-    { name: 'Aprender cómo se realizan las peticiones al servidor en JavaScript', completed: false, id:3
-    },
-  ];
+// const tasks = [
+//     { name: 'Recoger setas en el campo', completed: true},
+//     { name: 'Comprar pilas', completed: true},
+//     { name: 'Poner una lavadora de blancos', completed: true},
+//     { name: 'Aprender cómo se realizan las peticiones al servidor en JavaScript', completed: false},
+//   ];
 
-  // list.innerHTML = `<li><input type="checkbox"  id="input" name="input" class="task-input js-text-task-filter" checked><label for="input">Recoger setas en el campo</label></li>`;
-/*
-  list.innerHTML = 
-  `<li><input type="checkbox" 
-   id="input" 
-   name="input" 
-   class="task-input js-text-task-filter">
-   <label for="input"> ${tasks[0].name} </label></li>`+
+let tasks = [];
 
-   `<li><input type="checkbox" 
-   id="input" 
-   name="input" 
-   class="task-input js-text-task-filter">
-   <label for="input"> ${tasks[1].name} </label></li>`+
+fetch(SERVER_URL)
+  .then((response) => response.json())
+  .then((todo) => {
+    renderTasks(todo.results);
+    console.log(todo);
+    console.log(todo.results);
+  });
 
-   `<li><input type="checkbox" 
-   id="input" 
-   name="input" 
-   class="task-input js-text-task-filter">
-   <label for="input"> ${tasks[2].name} </label></li>`+
-
-   `<li><input type="checkbox" 
-   id="input" 
-   name="input" 
-   class="task-input js-text-task-filter">
-   <label for="input"> ${tasks[3].name} </label></li>`
-   
-*/
-  
-//NO ENTIENDO PARA QUE QUEREMOS EL TASK ID. PORQUE SALE IGUAL PINTADO 
-
- function renderList () {
-  for (const task of tasks){
-  
-  if(task.completed) {
-    list.innerHTML += 
-    `<li class='tachado js-li' name='${task.id}'>${task.name}<input 
-    type="checkbox" 
-    id="${task.id}" 
-    name="input" 
-    class="task-input js-text-task-filter" checked> </li>
-    `
-  } else { 
-    list.innerHTML +=  `<li class='js-li' name='${task.id}'>${task.name}<input 
-  type="checkbox" 
-  id="${task.id}" 
-  name="input" 
-  class="task-input js-text-task-filter" > </li>
-  `
-  }
-}
-//escuchar eventos del li
-const li = document.querySelectorAll ('.js-li'); //li es un array 
-  for (const eachli of li){
-    eachli.addEventListener('click', handleClick);
-    
-  }
- };
-
- function handleClick (event) {
-  console.log (event.currentTarget);
-  console.log (event.target);
-
- }
-
-
-  renderList();
- 
-  //2 FILTRAR TAREAS
-
-const btnFilter = document.querySelector('.js-btn-filter');
-const textTaskFilter = document.querySelector('.js-text-task-filter');
-const filteredTask = [];
-
-function handleFilter (event) {
-  event.preventDefault();
-  
-  /*list.innerHTML += `<li> ${textTaskFilter.value}</li>`;*/
-  
-  console.log(textTaskFilter.value);
-
-  for (const task of tasks) {
-    const inputFill = textTaskFilter.value
-    if (task.name.includes(inputFill)) {
-      filteredTask.push (task);
-      list.innerHTML += `<li> ${filteredTask.name} </li>`;
-    
-      
-      console.log (filteredTask);
-
-  } 
+function handleCheck(event) {
+  const id = event.target.id;
+  console.log(id);
+  tasks[id].completed = !tasks[id].completed;
+  console.log(tasks);
+  renderTasks(tasks);
 }
 
+const listenCheck = () => {
+  const allCheckbox = document.querySelectorAll(".js-check");
+  for (const check of allCheckbox) {
+    check.addEventListener("change", handleCheck);
+  }
 };
 
-btnFilter.addEventListener('click', handleFilter);
+const renderTasks = (tasks) => {
+  list.innerHTML = "";
+  for (let index = 0; index < tasks.length; index++) {
+    /*let classCss = tasks[index].completed ? 'tachado' : null;
+  taskList.innerHTML += `<li class= "${classCss}"> 
+    ${tasks[index].name}
+  </li>`;*/
+    if (tasks[index].completed) {
+      //tasks[index].completed === true
+      list.innerHTML += `<li class= "tachado"> 
+    <input type="checkbox" class= "js-check" id="${index}" checked>
+    ${tasks[index].name}
+  </li>`;
+    } else {
+      list.innerHTML += `<li> 
+    <input type="checkbox" class= "js-check" id="${index}">
+    ${tasks[index].name}
+  </li>`;
+    }
+  }
+  listenCheck();
+};
 
-/* 
-      
+renderTasks(tasks);
 
-      if (task.name.includes(inputFill)) {
-        filteredTask.push (task);
-        list.innerHTML += renderList(task);
-*/
-/*
-  console.log(list.innerHTML);
-  console.log(tasks[0].name);
-  console.log(tasks[1].name);
-  console.log(tasks[0].completed);
-*/
-/*
-  if (tasks[0].completed){
-    list.classList.add('tachado'); // le estoy poniendo la clase a la ul y no al li, se me van a tachar todos
-    list.setAttribute('checked', 'checked'); // igual, le estoy poniendo el atributo a la ul y no al li que es donde debería estar por eso no sale checked la caja
-  } */
+//2 FILTRAR TAREAS
+function handleFilter(event) {
+  event.preventDefault();
+  const valueInput = textTaskFilter.value;
+  const arrayFilter = tasks.filter((task) => task.name.includes(valueInput));
+  console.log(arrayFilter);
+  renderTasks(arrayFilter);
+}
+btnFilter.addEventListener("click", handleFilter);
