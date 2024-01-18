@@ -5,6 +5,13 @@ const btnFilter = document.querySelector('.js-btn-filter');
 const textTaskFilter = document.querySelector('.js-text-task-filter');
 const GITHUB_USER = 'nadinestrella';
 const SERVER_URL = `https://dev.adalab.es/api/todo/`;
+const newTask = document.querySelector('.js-text-task-add');
+const btnAdd = document.querySelector('.js-btn-add');
+
+const newTaskDataObject = {
+  name: '',
+  completed: '',
+}
 
 // const tasks = [
 //     { name: 'Recoger setas en el campo', completed: true},
@@ -14,6 +21,33 @@ const SERVER_URL = `https://dev.adalab.es/api/todo/`;
 //   ];
 
 let tasks = [];
+
+fetch(`https://dev.adalab.es/api/todo/`, {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify(newTaskDataObject),
+})
+  .then((response) => response.json())
+  .then((data) => {
+    if (data.success) {
+      handleAdd();
+      //Completa y/o modifica el código:
+      //Agrega la nueva tarea al listado
+      //Guarda el listado actualizado en el local storage
+      //Visualiza nuevamente el listado de tareas
+      //Limpia los valores de cada input
+    } else {
+      //muestra un mensaje de error.
+    }
+  });
+
+  function handleAdd(){
+    newTaskDataObject.name = newTask.value;
+    newTaskDataObject.completed = false;
+    renderTasks(newTaskDataObject);
+  }
+
+  btnAdd.addEventListener('click', handleAdd);
 
 fetch(SERVER_URL)
   .then((response) => response.json())
