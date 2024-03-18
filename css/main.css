@@ -143,8 +143,9 @@ li {
 }
 
 .deleteBtn {
-    background-color: #dc3545;
+    background-color: #F48E35;
     color: #fff;
+    padding: 5px 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
