@@ -33,9 +33,7 @@ body {
     border-radius: 5px;
 }
 
-.add {
-       max-width: 200px;
-}
+
 
 .main{
     display: flex;
@@ -57,12 +55,7 @@ h1 {
     gap:10px;
 }
 
-.task-form-add {
-    display: flex;
-    flex-direction: column;
-    gap:20px;
-    margin-bottom: 20px;
-}
+
 
 .task-input {
     flex: 1;
