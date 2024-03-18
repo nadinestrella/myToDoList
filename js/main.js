@@ -13,15 +13,21 @@ const allCheckbox = document.querySelectorAll('.js-check')
 
 
 for (let index = 0; index < tasks.length; index++) {
-  let classCss = tasks[index].completed ? 'done' : null;
-  /*let isChecked = tasks[index].completed ? 'checked' : '';  ${isChecked}*/
-  
-
-  taskList.innerHTML += `<li class= '${classCss}'>
-  <input type='checkbox' class='js-check' id='${index}' >
+  if(tasks[index].completed) {
+    taskList.innerHTML += `<li class= '${classCss}'>
+  <input type='checkbox' checked class='js-check' id='${index}' >
   
   ${tasks[index].name}
   </li>`;
+
+  }else{
+
+  taskList.innerHTML += `<li class= '${classCss}'>
+  <input type='checkbox'  class='js-check' id='${index}' >
+  
+  ${tasks[index].name}
+  </li>`;
+  }
 
 }
 
