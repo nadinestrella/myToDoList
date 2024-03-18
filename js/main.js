@@ -51,14 +51,16 @@ const renderTasks = ()=>{
 for (let index = 0; index < tasks.length; index++) {
   if(tasks[index].completed) {
     taskList.innerHTML += `<li class= 'done'>
-  <input type='checkbox' class='js-check' id='${index}' checked >
+  <input type='checkbox' class='js-check' id='${index}' checked
+   >
   
   ${tasks[index].name}
+  <button class='deleteBtn' js-deleteBtn > Delete </button>
   </li>`;
 
   }else{
 
-  taskList.innerHTML += `<li >
+  taskList.innerHTML += `<li  >
   <input type='checkbox'  class='js-check' id='${index}' >
   
   ${tasks[index].name}
