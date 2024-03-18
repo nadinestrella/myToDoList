@@ -142,7 +142,7 @@ li {
     background-color: #fff;
 }
 
-li button {
+.deleteBtn {
     background-color: #dc3545;
     color: #fff;
     border: none;
