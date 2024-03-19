@@ -9,7 +9,6 @@ let tasks = [
 const taskList = document.querySelector('.js-list');
 const addTaskInput = document.querySelector('.js-text-task-add');
 const addBtn = document.querySelector('.js-btn-add');
-const deleteButton = document.querySelectorAll('.js-delete-btn');
 const errorAdd = document.querySelector('.js-error-add')
 
 
@@ -25,7 +24,9 @@ const getFromLocalStorage = () => {
   const localStorageTasks=localStorage.getItem('savedTasks');
   if(localStorageTasks !== null && localStorageTasks !== undefined) {
     tasks = JSON.parse(localStorageTasks);
-    renderTasks(tasks);
+    renderTasks();
+  }else {
+    renderTasks()
   }
 };
 
@@ -49,38 +50,24 @@ const renderTasks = () => {
       html += `<input type='checkbox' class='js-check' id='${index}' checked
       > `;
       html += `${tasks[index].name} `
-      html += `<button class='deleteBtn js-delete-btn ' > X </button> `;
+      html += `<button class='deleteBtn js-delete-btn' id='${index}' > X </button> `;
       html += `</li> `;
 
     } else {
       html += `<li> `
       html += ` <input type='checkbox'  class='js-check' id='${index}' > `
       html += `${tasks[index].name} `
-      html += `<button class='deleteBtn js-delete-btn' > X </button> `
+      html += `<button class='deleteBtn js-delete-btn' id='${index}' > X </button> `
       html += `</li> `
       
     }
     taskList.innerHTML = html;
   }
   listenCheck();
+  listenDelete();
 };
 
-//DELETE TASK
 
-const handleDelete = (event) => {
-  const deleteTask = event.target.id
-  console.log(deleteTask);
-
-  if (deleteTask) {
-    /*const taskId = parseInt(tasks[index]);*/
-   
-    tasks.splice(index,1);
-    renderTasks()
-    setInLocalStorage()
-  }
-};
-
-/*deleteButton .addEventListener('click', handleDelete); */
 
 //ADD TASK
 
@@ -112,14 +99,31 @@ const listenCheck = () => {
   }
 };
 
-
 function handleCheck(event) {
   const id = event.target.id;
-  console.log(id);
   tasks[id].completed = !tasks[id].completed;
   renderTasks();
   setInLocalStorage();
 }
 
+const listenDelete = () => {
+  const allDelete = document.querySelectorAll('.js-delete-btn');
+  for (const deleteBtn of allDelete){
+    deleteBtn.addEventListener('click', handleDelete);
+  }
+}
+
+function handleDelete(event){
+  const deleteTaskId = event.target.id;
+  console.log(deleteTaskId);
+  if (deleteTaskId) {
+    const index = parseInt(deleteTaskId);
+    tasks.splice(index,1);
+    console.log(tasks)
+    renderTasks()
+    setInLocalStorage() 
+};
+  
+}
 
 getFromLocalStorage()
