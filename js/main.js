@@ -1,6 +1,6 @@
 'use strict';
 
-const tasks = [
+let tasks = [
   { name: 'shop groceries', completed: true  },
   { name: 'call to the doctor', completed: false },
   { name: 'read a book', completed: false },
@@ -10,6 +10,7 @@ const taskList = document.querySelector('.js-list');
 const addTaskInput = document.querySelector('.js-text-task-add');
 const addBtn = document.querySelector('.js-btn-add');
 const deleteButton = document.querySelectorAll('.js-delete-btn');
+const errorAdd = document.querySelector('.js-error-add')
 
 
 
@@ -27,9 +28,11 @@ const getFromLocalStorage = () => {
     renderTasks(tasks);
   }
 };
+
+/*
 const removeTask = ()=>{
   localStorage.removeItem()
-};
+}; */
 
 
 
@@ -58,12 +61,8 @@ const renderTasks = () => {
       
     }
     taskList.innerHTML = html;
-
-    
   }
-
   listenCheck();
-  setInLocalStorage();
 };
 
 //DELETE TASK
@@ -74,9 +73,10 @@ const handleDelete = (event) => {
 
   if (deleteTask) {
     /*const taskId = parseInt(tasks[index]);*/
-    console.log(taskId);
+   
     tasks.splice(index,1);
     renderTasks()
+    setInLocalStorage()
   }
 };
 
@@ -97,6 +97,7 @@ const handleAdd = (event) => {
     console.log(tasks);
     renderTasks();
   } else {
+    errorAdd.innerHTML = `Add a valid task`
     console.log('Add a valid task');
   }
   setInLocalStorage();
@@ -117,6 +118,8 @@ function handleCheck(event) {
   console.log(id);
   tasks[id].completed = !tasks[id].completed;
   renderTasks();
+  setInLocalStorage();
 }
 
-renderTasks();
+
+getFromLocalStorage()
