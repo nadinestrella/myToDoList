@@ -1,6 +1,6 @@
-# My Task Management Application
+# My To Do List
 
-Welcome to my task management application! This application allows you to efficiently organize and keep track of your tasks.
+Welcome to my to do list application! This application allows you to efficiently organize and keep track of your tasks.
 
 ## Features
 
@@ -12,8 +12,6 @@ Welcome to my task management application! This application allows you to effici
 ## Screenshots
 
 ![Homepage Screenshot](./images/toDoList.png)
-
-
 
 ## Installation
 
@@ -45,7 +43,3 @@ If you would like to contribute to this project, you are welcome to! Simply foll
 ## Credits
 
 This project was created by [Nadine Estrella](https://github.com/nadinestrella).
-
-
-
-
