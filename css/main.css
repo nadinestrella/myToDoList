@@ -140,7 +140,8 @@ li {
     background-color: #fff;
     position: relative;
 }
-ul li:hover {
+ul li:hover,
+.done {
   background: #ddd;
 }
 
@@ -157,15 +158,11 @@ ul li:hover {
    
 }
 
-.done{
-  text-decoration: line-through;
-  
-}
-.greyBackground{
-  background-color: #ddd; 
- 
 
+.done .text {
+  text-decoration: line-through;
 }
+
 .errortext{
   font-size: 14px;
   color: #F48E35;

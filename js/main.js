@@ -45,28 +45,15 @@ const renderTasks = () => {
   let html = '';
 
   for (let index = 0; index < tasks.length; index++) {
-    if (tasks[index].completed) {
-      html += `<li class='greyBackground' >`;
-      html += `<label class="material-checkbox">`;
-      html += `<input type='checkbox' class='js-check done'  id='${index}' checked
-      > `;
-      html += `<span class="checkmark"></span>`;
-      html += `<span class= 'done'>${tasks[index].name}</span> `
-      html += `</ label>`;
-      html += `<button class='deleteBtn js-delete-btn' id='${index}' > X </button> `;
-      html += `</li> `;
-
-    } else {
-      html += `<li> `
-      html += `<label class="material-checkbox">`;
-      html += ` <input type='checkbox'  class='js-check' id='${index}' > `
-      html += `<span class="checkmark"></span>`;
-      html += `<span>${tasks[index].name}</span> `
-      html += `</ label>`;
-      html += `<button class='deleteBtn js-delete-btn' id='${index}' > X </button> `
-      html += `</li> `
-      
-    }
+    html += `<li class="${tasks[index].completed ? 'done' : ''}">`;
+    html += `<label class="material-checkbox">`;
+    html += `<input type='checkbox' class='js-check' id='${index}' ${tasks[index].completed ? 'checked' : ''}
+    > `;
+    html += `<span class="checkmark"></span>`;
+    html += `<span class="text">${tasks[index].name}</span> `
+    html += `</label>`;
+    html += `<button class='deleteBtn js-delete-btn' id='${index}'> X </button> `;
+    html += `</li> `;
   }
 
   taskList.innerHTML = html;
