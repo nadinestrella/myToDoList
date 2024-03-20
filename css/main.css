@@ -78,6 +78,7 @@ h1 {
  
 }
 
+
 @keyframes bounce-in-top {
  
     0% {
@@ -137,6 +138,10 @@ li {
     border-radius: 5px;
     margin-bottom: 10px;
     background-color: #fff;
+    position: relative;
+}
+ul li:hover {
+  background: #ddd;
 }
 
 .deleteBtn {
@@ -146,6 +151,10 @@ li {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    position: absolute;
+    right: 6px;
+    
+   
 }
 
 .done{
@@ -153,7 +162,8 @@ li {
   
 }
 .greyBackground{
-  background-color: #A6A6A6 ;
+  background-color: #ddd; 
+ 
 
 }
 .errortext{
@@ -162,6 +172,7 @@ li {
   padding: 5px;
 
 }
+
 
 
 
@@ -184,7 +195,7 @@ li {
   width: 20px;
   height: 20px;
   margin-right: 12px;
-  border: 2px solid #454B00;
+  border: 2px solid #c6d51a;
   border-radius: 4px;
   transition: all 0.3s;
 }
