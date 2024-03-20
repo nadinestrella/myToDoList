@@ -68,23 +68,19 @@ const renderTasks = () => {
 const handleAdd = (event) => {
   event.preventDefault();
   const addNewtask = addTaskInput.value;
-  console.log(addNewtask);
   addTaskInput.value = '';
 
   if (addNewtask !== '') {
     const newTask = { name: addNewtask, completed: false };
     tasks.push(newTask);
-    console.log( newTask);
-    console.log(tasks);
     renderTasks();
   } else {
     errorAdd.innerHTML = `Add a valid task`
-    console.log('Add a valid task');
   }
   setInLocalStorage();
 };
 
-addBtn.addEventListener('click', handleAdd);
+addBtn.addEventListener('submit', handleAdd);
 
 const listenCheck = () => {
   const allCheckbox = document.querySelectorAll('.js-check');
@@ -109,12 +105,9 @@ const listenDelete = () => {
 
 function handleDelete(event){
   const deleteTaskId = event.target.id;
-  console.log(deleteTaskId);
   if (deleteTaskId) {
     const index = parseInt(deleteTaskId);
-    console.log(index)
     tasks.splice(index,1);
-    console.log(tasks)
     renderTasks()
     setInLocalStorage() 
 };
