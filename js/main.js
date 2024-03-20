@@ -46,10 +46,13 @@ const renderTasks = () => {
 
   for (let index = 0; index < tasks.length; index++) {
     if (tasks[index].completed) {
-      html += `<li class='done'>`;
-      html += `<input type='checkbox' class='js-check' id='${index}' checked
+      html += `<li class='greyBackground' >`;
+      html += `<label class="material-checkbox">`;
+      html += `<input type='checkbox' class='js-check done'  id='${index}' checked
       > `;
-      html += `${tasks[index].name} `
+      html += `<span class="checkmark"></span>`;
+      html += `</ label>`;
+      html += `<span class= 'done'>${tasks[index].name}</span> `
       html += `<button class='deleteBtn js-delete-btn' id='${index}' > X </button> `;
       html += `</li> `;
 

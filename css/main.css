@@ -121,9 +121,6 @@ h1 {
   }
   
 
-
-
-
 ul {
     list-style-type: none;
     padding: 0;
@@ -152,8 +149,12 @@ li {
 }
 
 .done{
-    text-decoration: line-through;
-    background-color: #A6A6A6 ;
+  text-decoration: line-through;
+  
+}
+.greyBackground{
+  background-color: #A6A6A6 ;
+
 }
 .errortext{
   font-size: 14px;
@@ -162,5 +163,63 @@ li {
 
 }
 
-/* https://color.adobe.com/es/explore?page=2 */
-/*
+
+
+.material-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.material-checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkmark {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  border: 2px solid #454B00;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.material-checkbox input[type="checkbox"]:checked ~ .checkmark {
+  background-color: #c6d51a;
+  border-color: #c6d51a ;
+}
+
+.material-checkbox input[type="checkbox"]:checked ~ .checkmark:after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 6px;
+  width: 4px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.material-checkbox input[type="checkbox"]:focus ~ .checkmark {
+  box-shadow: 0 0 0 2px #dfec5065;
+}
+
+.material-checkbox:hover input[type="checkbox"] ~ .checkmark {
+  border-color: #C3CF34;
+}
+
+.material-checkbox input[type="checkbox"]:disabled ~ .checkmark {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.material-checkbox input[type="checkbox"]:disabled ~ .checkmark:hover {
+  border-color: #4d4d4d;
+}
+
