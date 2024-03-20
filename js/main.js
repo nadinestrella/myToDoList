@@ -21,7 +21,7 @@ const setInLocalStorage = () => {
   localStorage.setItem('savedTasks', stringigyTasks)
 };
 const getFromLocalStorage = () => {
-  const localStorageTasks=localStorage.getItem('savedTasks');
+  const localStorageTasks = localStorage.getItem('savedTasks');
   if(localStorageTasks !== null && localStorageTasks !== undefined) {
     tasks = JSON.parse(localStorageTasks);
     renderTasks();
@@ -67,8 +67,9 @@ const renderTasks = () => {
       html += `</li> `
       
     }
-    taskList.innerHTML = html;
   }
+
+  taskList.innerHTML = html;
   listenCheck();
   listenDelete();
 };
@@ -124,6 +125,7 @@ function handleDelete(event){
   console.log(deleteTaskId);
   if (deleteTaskId) {
     const index = parseInt(deleteTaskId);
+    console.log(index)
     tasks.splice(index,1);
     console.log(tasks)
     renderTasks()
