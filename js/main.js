@@ -32,7 +32,7 @@ const getFromLocalStorage = () => {
 
 const renderTasks = () => {
   let html = '';
-
+  // TODO: sort task by non completed first
   for (let index = 0; index < tasks.length; index++) {
     html += `<li class="${tasks[index].completed ? 'done' : ''}">`;
     html += `<label class="material-checkbox">`;
