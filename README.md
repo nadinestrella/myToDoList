@@ -39,6 +39,7 @@ If you would like to contribute to this project, you are welcome to! Simply foll
 - HTML5
 - CSS3
 - JavaScript
+- TypeScript
 
 ## Credits
 
