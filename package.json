@@ -1,0 +1,15 @@
+{
+  "name": "mytodolist",
+  "version": "1.0.0",
+  "description": "Welcome to my to do list application! This application allows you to efficiently organize and keep track of your tasks.",
+  "main": "index.js",
+  "devDependencies": {
+    "typescript": "^5.4.4"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

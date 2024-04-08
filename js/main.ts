@@ -1,15 +1,24 @@
 'use strict';
 
-let tasks = [
+interface Task {
+  name: string;
+  completed: boolean;
+}
+
+let tasks: Task[] = [
   { name: 'shop groceries', completed: true },
   { name: 'call to the doctor', completed: false },
   { name: 'read a book', completed: false },
 ];
 
-const taskList = document.querySelector('.js-list');
-const addTaskInput = document.querySelector('.js-text-task-add');
-const addBtn = document.querySelector('.js-btn-add');
-const errorAdd = document.querySelector('.js-error-add');
+const taskList = document.querySelector('.js-list') as HTMLUListElement;
+const addTaskInput = document.querySelector(
+  '.js-text-task-add'
+) as HTMLInputElement;
+const addBtn = document.querySelector('.js-btn-add') as HTMLFormElement;
+const errorAdd = document.querySelector(
+  '.js-error-add'
+) as HTMLParagraphElement;
 
 //LOCAL STORAGE
 
@@ -55,13 +64,13 @@ const renderTasks = () => {
 
 //ADD TASK
 
-const handleAdd = (event) => {
+const handleAdd = (event: Event) => {
   event.preventDefault();
   const addNewtask = addTaskInput.value;
   addTaskInput.value = '';
 
   if (addNewtask !== '') {
-    const newTask = { name: addNewtask, completed: false };
+    const newTask: Task = { name: addNewtask, completed: false };
     tasks.push(newTask);
 
     renderTasks();
@@ -80,8 +89,10 @@ const listenCheck = () => {
   }
 };
 
-function handleCheck(event) {
-  const id = event.target.id;
+function handleCheck(event: Event) {
+  const target = event.target as HTMLInputElement;
+
+  const id = parseInt(target.id);
   tasks[id].completed = !tasks[id].completed;
 
   renderTasks();
@@ -96,12 +107,12 @@ const listenDelete = () => {
   }
 };
 
-function handleDelete(event) {
-  const deleteTaskId = event.target.id;
+function handleDelete(event: Event) {
+  const target = event.target as HTMLButtonElement;
+  const deleteTaskId = parseInt(target.id);
 
-  if (deleteTaskId) {
-    const index = parseInt(deleteTaskId);
-    tasks.splice(index, 1);
+  if (!isNaN(deleteTaskId)) {
+    tasks.splice(deleteTaskId, 1);
 
     renderTasks();
     setInLocalStorage();
